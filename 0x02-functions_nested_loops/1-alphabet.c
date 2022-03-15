@@ -2,7 +2,7 @@
 
 /**
  * main - Entry point
- * write function that prints alphabets in lower case followed by a new line
+ * Description: Prints alphabets in lower case
  * Return: (0)
  */
 void print_alphabet(void)
@@ -11,7 +11,7 @@ void print_alphabet(void)
 
 	for (c = 'a'; c <= 'z'; c++)
 	{
-		_putchar(c)
+		_putchar(c);
 	}
 	_putchar('\n');
 }
