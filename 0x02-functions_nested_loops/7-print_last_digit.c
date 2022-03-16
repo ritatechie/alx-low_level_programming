@@ -1,15 +1,15 @@
 #include "main.h"
 
 /**
- * print_last_digit - prints anumber last digit
- * @n: number is an integer
+ * _print_last_digit - prints anumber last digit
+ * @x: number is an integer
  * Return: last digit
  */
-int print_last_digit(int n)
+int _print_last_digit(int x)
 {
 	int l;
 
-	l = n % 10;
+	l = x % 10;
 	if (l < 0)
 	{
 		_putchar(-l + 48);
