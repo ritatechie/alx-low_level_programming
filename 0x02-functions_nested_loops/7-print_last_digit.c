@@ -1,11 +1,11 @@
 #include "main.h"
 
 /**
- * _print_last_digit - prints a last digit
+ * print_last_digit - prints a last digit
  * @x: number is an integer
- * Return: last digit
+ * Return:(0)
  */
-int _print_last_digit(int x)
+int print_last_digit(int x)
 {
 	int y, e;
 
