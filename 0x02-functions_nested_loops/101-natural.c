@@ -13,7 +13,7 @@ int main(void)
 		y = a * 3;
 		s = s + y;
 	}
-	for (b = 0 b < (1024 / 5); b++)
+	for (b = 0; b < (1024 / 5); b++)
 	{
 		if (!(b % 3 == 0))
 		{
