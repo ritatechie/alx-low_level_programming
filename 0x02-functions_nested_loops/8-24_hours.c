@@ -18,7 +18,7 @@ void jack_bauer(void)
 			t = j % 10;
 			_putchar('0' + k);
 			_putchar('0' + y);
-			_putchar(":");
+			_putchar(':');
 			_putchar('0' + m);
 			_putchar('0' + t);
 			_putchar('\n');
