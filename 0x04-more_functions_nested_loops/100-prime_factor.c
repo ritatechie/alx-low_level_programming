@@ -12,7 +12,8 @@ int main(void)
 	{
 		if (number % i == 0)
 		{
-			number = number / i; i--;
+			number = number / i;
+			i--;
 		}
 	}
 	printf("%lu\n", i);
