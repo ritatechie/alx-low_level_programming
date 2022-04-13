@@ -26,9 +26,8 @@ int main(int argc, char *argv[])
 	i = 0;
 	if (x > 0)
 	{
-		while (i < (x - 1))
-			printf("%02hhx ", p[i++]);
-		printf("%hhx\n", p[i]);
+		while (x--)
+			printf("%02x%c ", *mem++ & 0xff, x ? '' :'\n');
 	}
 	return (0);
 }
