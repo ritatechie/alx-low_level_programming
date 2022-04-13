@@ -1,33 +1,34 @@
 #include <stdio.h>
 #include <stdlib.h>
+
 /**
- * main - prints opcode of own main function
- * @argc: argument count
- * @argv: arg value
- * Return: int
+ * main - print opcodes of this function
+ * @argc: the size of the argument vector
+ * @argv: the argument vector
+ *
+ * Return: Always 0
  */
 int main(int argc, char *argv[])
 {
-	int x, i;
-	unsigned char *p;
+	int b;
+	char *mem = (char *) main;
 
 	if (argc != 2)
 	{
 		printf("Error\n");
 		exit(1);
 	}
-	x = atoi(argv[1]);
-	if (x < 0)
+
+	b = atoi(argv[1]);
+
+	if (b < 0)
 	{
 		printf("Error\n");
 		exit(2);
 	}
-	p = (unsigned char *)main;
-	i = 0;
-	if (x > 0)
-	{
-		while (x--)
-			printf("%02x%c ", *mem++ & 0xff, x ? '' :'\n');
-	}
+
+	while (b--)
+		printf("%02x%c", *mem++ & 0xff, b ? ' ' : '\n');
+
 	return (0);
 }
