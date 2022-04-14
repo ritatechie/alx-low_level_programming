@@ -1,26 +1,28 @@
 #include "variadic_functions.h"
-#include <stdarg.h>
-#include <stdio.h>
+
 /**
- * print_numbers - print variadic number
- * @separator: char
- * @n:variadic variable count
- * Return :void
+ * print_numbers - print integers
+ * @separator: the output separator
+ * @n: the number of integers to print
+ * @...: the integers to print
+ *
+ * Description: This function prints integers, separated by separator, followed
+ * by a new line. If separator is NULL, it's treated as the empty string.
  */
 void print_numbers(const char *separator, const unsigned int n, ...)
 {
-	va_list list;
-	unsigned int i;
+	va_list args;
+	unsigned int remaining = n;
 
-	va_start(list, n);
-for (i = 0; i < n; i++)
-{
-	printf("%d", va_arg(list, int));
-	if (separator && i < n - 1)
+	va_start(args, n);
+	if (!separator)
+		separator = "";
+	while (remaining--)
 	{
-		printf("%s", separator);
+		printf("%i", va_arg(args, int));
+		if (remaining)
+			printf("%s", separator);
 	}
-}
 	printf("\n");
-	va_end(list);
+	va_end(args);
 }

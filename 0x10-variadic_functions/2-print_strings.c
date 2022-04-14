@@ -1,29 +1,28 @@
 #include "variadic_functions.h"
-#include <stdarg.h>
-#include<stdio.h>
-/**
- * print_strings - print strings
- * @separator:char
- * @n:unsigned int
- * Return:void
- */
-void print_strings(const char *separator, const unsigned int n, ...)
-{
-	va_list list;
-	unsigned int i;
-	char *str;
 
-	va_start(list, n);
-	for (i = 0; i < n; i++)
+/**
+ * print_numbers - print integers
+ * @separator: the output separator
+ * @n: the number of integers to print
+ * @...: the integers to print
+ *
+ * Description: This function prints integers, separated by separator, followed
+ * by a new line. If separator is NULL, it's treated as the empty string.
+ */
+void print_numbers(const char *separator, const unsigned int n, ...)
+{
+	va_list args;
+	unsigned int remaining = n;
+
+	va_start(args, n);
+	if (!separator)
+		separator = "";
+	while (remaining--)
 	{
-		str = va_arg(list, char *);
-		if (str)
-			printf("%s", str);
-		else
-			printf("(nil)");
-		if (i < n - 1 && separator)
+		printf("%i", va_arg(args, int));
+		if (remaining)
 			printf("%s", separator);
 	}
-	va_end(list);
 	printf("\n");
+	va_end(args);
 }
