@@ -1,67 +1,94 @@
+#include <stdio.h>
+#include <stdarg.h>
 #include "variadic_functions.h"
-#include<stdio.h>
-#include<stdarg.h>
+
+
 /**
- * p_char - print char
- * @list:arg
- * Return: void
+ * print_char - print a character
+ * @args: the va_list with the character to print as it's next element
+ *
+ * Return: the number of bytes printed
  */
-void p_char(va_list list)
+int print_char(va_list args)
 {
-	printf("%c", va_arg(list, int));
+	return (printf("%c", va_arg(args, int)));
 }
 
-void p_string(va_list list)
-{
-	char *str;
 
-	str = va_arg(list, char*);
-	if (str == NULL)
+/**
+ * print_float - print a float
+ * @args: the va_list with the float to print as it's next element
+ *
+ * Return: the number of bytes printed
+ */
+int print_float(va_list args)
+{
+	return (printf("%f", va_arg(args, double)));
+}
+
+
+/**
+ * print_int - print an integer
+ * @args: the va_list with the integer to print as it's next element
+ *
+ * Return: the number of bytes printed
+ */
+int print_int(va_list args)
+{
+	return (printf("%i", va_arg(args, int)));
+}
+
+
+/**
+ * print_str - print a string
+ * @args: the va_list with the string to print as it's next element
+ *
+ * Return: the number of bytes printed
+ */
+int print_str(va_list args)
+{
+	const char *str = va_arg(args, const char *);
+
+	if (!str)
 		str = "(nil)";
-printf("%s", str);
+	return (printf("%s", str));
 }
 
-void p_integer(va_list list)
-{
-	printf("%i", va_arg(list, int));
-}
 
-void p_float(va_list list)
-{
-	printf("%f", va_arg(list, double));
-}
-
+/**
+ * print_all - print anything
+ * @format: a format string listing the types of the proceeding arguments
+ * @...: the values to print
+ */
 void print_all(const char * const format, ...)
 {
-	unsigned int i, j;
-	t_print t[] = {
-		{"c", p_char},
-		{"s", p_string},
-		{"i", p_integer},
-		{"f", p_float},
-		{NULL, NULL}
+	va_list args;
+	print_fn_t fn_list[] = {
+		{'c', print_char},
+		{'f', print_float},
+		{'i', print_int},
+		{'s', print_str},
+		{ 0,  NULL}
 	};
-	va_list valist;
-	char *s = "";
+	char *sep[] = {"", ", "};
+	unsigned int bytes = 0, fn_index = 0, format_index = 0;
 
-	va_start(valist, format);
-	i = 0;
-	while (format && format[i])
+	va_start(args, format);
+	while (format && format[format_index])
 	{
-		j = 0;
-		while (t[j].x != NULL)
+		fn_index = 0;
+		while (fn_list[fn_index].format)
 		{
-			if (*(t[j].x) == format[i])
+			if (format[format_index] == fn_list[fn_index].format)
 			{
-				printf("%s", s);
-				t[j].T_func(valist);
-				s = ", ";
+				printf("%s", sep[bytes != 0]);
+				bytes += fn_list[fn_index].fn(args);
 				break;
 			}
-			j++;
+			++fn_index;
 		}
-		i++;
+		++format_index;
 	}
-	va_end(valist);
 	printf("\n");
+	va_end(args);
 }
