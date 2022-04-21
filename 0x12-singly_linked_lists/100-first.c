@@ -1,10 +1,14 @@
 #include <stdio.h>
+
+void init(void) __attribute__((constructor));
+
 /**
- * b - prints from init by the loader before main
+ * init - execute before main
  */
-void b(void) __attribute__ ((constructor));
-void b(void)
+void init(void)
 {
-	printf("You're beat! and yet, you must allow,\n");
-	printf("I bore my house upon my back!\n");
+	printf("%s\n%s\n",
+	"You're beat! and yet, you must allow,",
+	"I bore my house upon my back!"
+	);
 }
